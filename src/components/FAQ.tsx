@@ -8,7 +8,7 @@ export function FAQ() {
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">¿Tienes dudas?</h2>
         <p className="text-center text-gray-600 mb-12">
           Escríbenos al{" "}
-          <Link href="https://chat.rooftify.com" className="text-blue-600 hover:underline">
+          <Link href="https://api.whatsapp.com/send/?phone=595981657505&text=Hola%2C+tengo+algunas+dudas+sobre+Rooftify+y+me+gustar%C3%ADa+recibir+m%C3%A1s+informaci%C3%B3n&type=phone_number&app_absent=0" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">
             chat
           </Link>{" "}
           y te ayudamos a resolverlas.
@@ -62,4 +62,3 @@ export function FAQ() {
     </section>
   )
 }
-
