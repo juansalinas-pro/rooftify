@@ -31,20 +31,24 @@ export function WhatWeDo() {
 
   return (
     <section className="py-20 px-6 bg-gradient-to-br from-white to-blue-50">
-      <div className="container mx-auto max-w-6xl">
+      <div className="container mx-auto max-w-7xl">
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 text-blue-800">¿Qué hacemos?</h2>
-        <div className="space-y-20 relative">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
           {steps.map((step, index) => (
-            <div key={index} className="flex flex-col md:flex-row items-center gap-8 md:gap-24">
-              <div className="md:w-1/2 flex justify-center relative">
-                <div className="w-32 h-32 bg-blue-100 rounded-full flex items-center justify-center shadow-lg transform transition-transform duration-300 hover:scale-110">
-                  <step.icon className="w-16 h-16 text-blue-600" />
+            <div
+              key={index}
+              className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 relative pt-12 pb-6 px-6 text-center"
+            >
+              <div className="absolute top-3 left-3">
+                <div className="w-8 h-8 bg-orange-500 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                  {index + 1}
                 </div>
               </div>
-              <div className="md:w-1/2 text-center md:text-left">
-                <h3 className="text-2xl font-bold mb-4 text-blue-800">{step.title}</h3>
-                <p className="text-gray-600 text-lg leading-relaxed">{step.description}</p>
+              <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <step.icon className="w-10 h-10 text-blue-600" />
               </div>
+              <h3 className="text-xl font-bold mb-3 text-blue-800">{step.title}</h3>
+              <p className="text-gray-600">{step.description}</p>
             </div>
           ))}
         </div>
@@ -52,4 +56,3 @@ export function WhatWeDo() {
     </section>
   )
 }
-

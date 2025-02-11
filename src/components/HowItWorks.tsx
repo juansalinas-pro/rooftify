@@ -33,7 +33,7 @@ export function HowItWorks() {
               className="bg-white rounded-xl p-8 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 relative overflow-hidden"
             >
               <div className="absolute top-0 left-0 w-full h-1 bg-blue-600"></div>
-              <div className="absolute top-4 left-4 w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">
+              <div className="absolute top-4 left-4 w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold">
                 {step.step}
               </div>
               <div className="flex justify-center mb-6 mt-8">
@@ -50,4 +50,3 @@ export function HowItWorks() {
     </section>
   )
 }
-
