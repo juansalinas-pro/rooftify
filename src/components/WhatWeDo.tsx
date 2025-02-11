@@ -40,7 +40,7 @@ export function WhatWeDo() {
               className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 relative pt-12 pb-6 px-6 text-center"
             >
               <div className="absolute top-3 left-3">
-                <div className="w-8 h-8 bg-orange-500 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                <div className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
                   {index + 1}
                 </div>
               </div>
