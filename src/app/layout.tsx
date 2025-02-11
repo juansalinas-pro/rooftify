@@ -14,7 +14,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Google Tag Manager */}
         <Script
           async
-          src="https://www.googletagmanager.com/gtag/js?id=G-EW2WW7H2V1"
+          src="https://www.googletagmanager.com/gtag/js?id=G-C5ELGD4Y2Y"
         />
         <Script
           id="google-analytics"
@@ -25,7 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               function gtag(){dataLayer.push(arguments);}
               window.gtag = gtag;
               gtag('js', new Date());
-              gtag('config', 'G-EW2WW7H2V1', {
+              gtag('config', 'G-C5ELGD4Y2Y', {
                 page_path: window.location.pathname,
               });
             `,

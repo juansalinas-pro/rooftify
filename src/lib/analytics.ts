@@ -1,5 +1,5 @@
 export const pageview = (url: string) => {
-    window.gtag("config", "G-0TPFNCP0H5", {
+    window.gtag("config", "G-C5ELGD4Y2Y", {
       page_path: url,
     });
   };

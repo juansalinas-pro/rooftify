@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 const pageview = (url: string) => {
   if (typeof window !== "undefined" && window.gtag) {
-    window.gtag("config", "G-EW2WW7H2V1", {
+    window.gtag("config", "G-C5ELGD4Y2Y", {
       page_path: url,
     });
   }
