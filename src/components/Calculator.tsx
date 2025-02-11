@@ -1,228 +1,99 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
+import { useState, useEffect, useRef, useMemo } from "react"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
 import { Area, AreaChart, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from "recharts"
+import { Button } from "@/components/ui/button"
+import { useContactForm } from "@/contexts/ContactFormContext"
 
 export function Calculator() {
-  const [step, setStep] = useState<"input" | "result">("input")
-  const [initialAmount, setInitialAmount] = useState("100000")
-  const [monthlyAmount, setMonthlyAmount] = useState("100000")
+  const { openContactForm } = useContactForm()
+  const [initialAmount, setInitialAmount] = useState("100")
+  const [monthlyAmount, setMonthlyAmount] = useState("20")
   const [years, setYears] = useState("10")
-  const [chartData, setChartData] = useState<any[]>([])
-  const [isMobile, setIsMobile] = useState(false)
-
-  // Calculate initial chart data on component mount
-  useEffect(() => {
-    calculateInvestment()
-  }, []) // Run once on mount
+  const inputRef = useRef<HTMLInputElement | null>(null)
+  const [focusedInput, setFocusedInput] = useState<"initial" | "monthly" | "years" | null>(null)
 
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768)
+    if (focusedInput && inputRef.current) {
+      inputRef.current.focus()
     }
-    checkMobile()
-    window.addEventListener("resize", checkMobile)
-    return () => window.removeEventListener("resize", checkMobile)
-  }, [])
+  }, [focusedInput])
 
-  const calculateInvestment = () => {
-    const initial = Number.parseFloat(initialAmount)
-    const monthly = Number.parseFloat(monthlyAmount)
-    const period = Number.parseInt(years)
-    const interestRate = 0.12 // 12% annual interest rate
+  const chartData = useMemo(() => {
+    const initial = Number.parseFloat(initialAmount) || 100
+    const monthly = Number.parseFloat(monthlyAmount) || 20
+    const period = Number.parseInt(years) || 10
+    const annualInterestRate = 0.085
+    const monthlyInterestRate = annualInterestRate / 12
 
     const data = []
     let totalWithInterest = initial
     let totalWithoutInterest = initial
 
     for (let year = 0; year <= period; year++) {
-      const yearlyContribution = monthly * 12
-      totalWithoutInterest = initial + yearlyContribution * year
-      totalWithInterest = (totalWithInterest + yearlyContribution) * (1 + interestRate)
+      if (year > 0) {
+        for (let month = 0; month < 12; month++) {
+          totalWithInterest = (totalWithInterest + monthly) * (1 + monthlyInterestRate)
+        }
+      }
+      totalWithoutInterest = initial + monthly * 12 * year
 
       data.push({
         year: `Año ${year}`,
-        withInterest: Math.round(totalWithInterest),
-        withoutInterest: Math.round(totalWithoutInterest),
+        "Con interés compuesto": Math.round(totalWithInterest),
+        "Total invertido": Math.round(totalWithoutInterest),
       })
     }
+    return data
+  }, [initialAmount, monthlyAmount, years])
 
-    setChartData(data)
-    if (isMobile) {
-      setStep("result")
+  const handleInputChange = (setter: React.Dispatch<React.SetStateAction<string>>, field: "initial" | "monthly" | "years") => 
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setter(e.target.value)
+      setFocusedInput(field)
     }
-  }
 
-  const formatCurrency = (value: number) => {
-    return new Intl.NumberFormat("es-CL", {
-      style: "currency",
-      currency: "CLP",
-      maximumFractionDigits: 0,
-    }).format(value)
-  }
+  const formatCurrency = (value: number) => 
+    new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(value)
 
-  const DesktopCalculator = () => (
-    <Card className="w-full max-w-6xl mx-auto bg-white shadow-xl p-8">
+  return (
+    <Card className="w-full max-w-6xl mx-auto bg-white shadow-xl p-6 md:p-8">
       <CardContent className="p-0">
-        <div className="text-center mb-8">
-          <h2 className="text-2xl font-light text-gray-600 mb-2">SIMULA TU GANANCIA</h2>
-          <h3 className="text-3xl font-bold text-blue-800">¿y cuánto gano?</h3>
+        <div className="text-center mb-6 md:mb-8">
+          <h2 className="text-xl md:text-2xl font-light text-gray-600 mb-1 md:mb-2">SIMULA TU GANANCIA</h2>
+          <h3 className="text-2xl md:text-3xl font-bold text-blue-800">¿y cuánto gano?</h3>
         </div>
-
-        <div className="grid grid-cols-3 gap-8 mb-12">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Puedo partir con:</label>
-            <Input
-              type="number"
-              value={initialAmount}
-              onChange={(e) => setInitialAmount(e.target.value)}
-              className="border-blue-600 focus:ring-blue-600"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">y mensualmente voy a invertir:</label>
-            <Input
-              type="number"
-              value={monthlyAmount}
-              onChange={(e) => setMonthlyAmount(e.target.value)}
-              className="border-blue-600 focus:ring-blue-600"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              La constancia es la clave. Voy a invertir por:
-            </label>
-            <Input
-              type="number"
-              value={years}
-              onChange={(e) => setYears(e.target.value)}
-              className="border-blue-600 focus:ring-blue-600"
-            />
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 mb-6 md:mb-12">
+          <Input ref={focusedInput === "initial" ? inputRef : null} type="number" placeholder="100" value={initialAmount} onChange={handleInputChange(setInitialAmount, "initial")} className="w-full" />
+          <Input ref={focusedInput === "monthly" ? inputRef : null} type="number" placeholder="20" value={monthlyAmount} onChange={handleInputChange(setMonthlyAmount, "monthly")} className="w-full" />
+          <Input ref={focusedInput === "years" ? inputRef : null} type="number" placeholder="10" value={years} onChange={handleInputChange(setYears, "years")} className="w-full" />
         </div>
-
-        <div className="h-[400px] w-full mb-8">
+        <div className="h-[300px] md:h-[400px] w-full mb-6 md:mb-8">
           <ResponsiveContainer width="100%" height="100%">
-            <AreaChart data={chartData} margin={{ top: 10, right: 30, left: 40, bottom: 20 }}>
+            <AreaChart data={chartData} margin={{ top: 10, right: 20, left: 20, bottom: 20 }}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="year" />
-              <YAxis
-                tickFormatter={(value) => `$${(value / 1000000).toFixed(1)}M`}
-                domain={[0, "dataMax"]}
-                allowDataOverflow={true}
-              />
-              <Tooltip formatter={(value: number) => formatCurrency(value)} labelStyle={{ color: "#1e40af" }} />
-              <Area type="monotone" dataKey="withInterest" stroke="#0891b2" fill="#0891b2" fillOpacity={0.6} />
-              <Area type="monotone" dataKey="withoutInterest" stroke="#64748b" fill="#64748b" fillOpacity={0.6} />
+              <YAxis tickFormatter={formatCurrency} domain={[0, "dataMax"]} />
+              <Tooltip formatter={(value: number) => formatCurrency(value)} />
+              <Area type="monotone" dataKey="Con interés compuesto" stroke="#0891b2" fillOpacity={0.6} />
+              <Area type="monotone" dataKey="Total invertido" stroke="#64748b" fillOpacity={0.6} />
             </AreaChart>
           </ResponsiveContainer>
         </div>
-
-        <p className="text-xs text-gray-500 text-center mb-8">
-          *Los resultados son simulados a partir de una tasa de interés del 12% estimada.
+        <p className="text-xs text-gray-500 text-center mb-6 md:mb-8">
+          *Los resultados son simulados a partir de una tasa de interés del 8.5% estimada.
         </p>
-
         <div className="flex justify-center">
           <Button
-            onClick={calculateInvestment}
-            className="bg-blue-800 hover:bg-blue-900 text-white py-6 px-8 rounded-full text-lg"
+            onClick={openContactForm}
+            className="bg-orange-500 hover:bg-orange-600 text-white transition-colors text-lg px-6 md:px-8 py-4 md:py-6 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1"
           >
-            Simula tu inversión
+            Asegurar mi acceso anticipado
           </Button>
         </div>
       </CardContent>
     </Card>
   )
-
-  const MobileCalculator = () => (
-    <Card className="w-full max-w-lg mx-auto bg-white shadow-xl">
-      <CardContent className="p-6">
-        <h2 className="text-2xl font-light text-center mb-2 text-gray-600">SIMULA TU GANANCIA</h2>
-        {step === "input" ? (
-          <>
-            <h3 className="text-3xl font-bold text-center mb-8 text-blue-800">¿y cuánto gano?</h3>
-            <div className="space-y-6">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Puedo partir con:</label>
-                <Input
-                  type="number"
-                  value={initialAmount}
-                  onChange={(e) => setInitialAmount(e.target.value)}
-                  className="border-blue-600 focus:ring-blue-600"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">y mensualmente voy a invertir:</label>
-                <Input
-                  type="number"
-                  value={monthlyAmount}
-                  onChange={(e) => setMonthlyAmount(e.target.value)}
-                  className="border-blue-600 focus:ring-blue-600"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  La constancia es la clave. Voy a invertir por:
-                </label>
-                <Input
-                  type="number"
-                  value={years}
-                  onChange={(e) => setYears(e.target.value)}
-                  className="border-blue-600 focus:ring-blue-600"
-                />
-              </div>
-              <p className="text-xs text-gray-500 text-center mt-4">
-                *Los resultados son simulados a partir de una tasa de interés del 12% estimada.
-              </p>
-              <Button
-                onClick={calculateInvestment}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white py-6 rounded-full"
-              >
-                Simula tu futuro
-              </Button>
-            </div>
-          </>
-        ) : (
-          <>
-            <h3 className="text-2xl font-light text-center mb-2 text-gray-600">Los resultados simulados son:</h3>
-            <div className="h-[50vh] min-h-[300px] w-full mt-8">
-              <ResponsiveContainer width="100%" height="100%">
-                <AreaChart data={chartData} margin={{ top: 10, right: 10, left: 0, bottom: 20 }}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="year" />
-                  <YAxis
-                    tickFormatter={(value) => `$${(value / 1000000).toFixed(1)}M`}
-                    domain={[0, "dataMax"]}
-                    allowDataOverflow={true}
-                  />
-                  <Tooltip formatter={(value: number) => formatCurrency(value)} labelStyle={{ color: "#1e40af" }} />
-                  <Area type="monotone" dataKey="withInterest" stroke="#0891b2" fill="#0891b2" fillOpacity={0.6} />
-                  <Area type="monotone" dataKey="withoutInterest" stroke="#64748b" fill="#64748b" fillOpacity={0.6} />
-                </AreaChart>
-              </ResponsiveContainer>
-            </div>
-            <p className="text-xs text-gray-500 text-center mt-4">
-              *Los resultados son simulados a partir de una tasa de interés del 12% estimada.
-            </p>
-            <div className="flex gap-4 mt-6">
-              <Button
-                onClick={() => setStep("input")}
-                variant="outline"
-                className="flex-1 border-blue-600 text-blue-600 hover:bg-blue-50"
-              >
-                Volver
-              </Button>
-              <Button className="flex-1 bg-blue-600 hover:bg-blue-700 text-white">Invertir</Button>
-            </div>
-          </>
-        )}
-      </CardContent>
-    </Card>
-  )
-
-  return isMobile ? <MobileCalculator /> : <DesktopCalculator />
 }
-
