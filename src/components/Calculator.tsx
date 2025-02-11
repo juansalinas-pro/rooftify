@@ -66,9 +66,18 @@ export function Calculator() {
           <h3 className="text-2xl md:text-3xl font-bold text-blue-800">¿y cuánto gano?</h3>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 mb-6 md:mb-12">
-          <Input ref={focusedInput === "initial" ? inputRef : null} type="number" placeholder="100" value={initialAmount} onChange={handleInputChange(setInitialAmount, "initial")} className="w-full" />
-          <Input ref={focusedInput === "monthly" ? inputRef : null} type="number" placeholder="20" value={monthlyAmount} onChange={handleInputChange(setMonthlyAmount, "monthly")} className="w-full" />
-          <Input ref={focusedInput === "years" ? inputRef : null} type="number" placeholder="10" value={years} onChange={handleInputChange(setYears, "years")} className="w-full" />
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Puedo partir con:</label>
+            <Input ref={focusedInput === "initial" ? inputRef : null} type="number" placeholder="100" value={initialAmount} onChange={handleInputChange(setInitialAmount, "initial")} className="w-full" />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">y mensualmente voy a invertir:</label>
+            <Input ref={focusedInput === "monthly" ? inputRef : null} type="number" placeholder="20" value={monthlyAmount} onChange={handleInputChange(setMonthlyAmount, "monthly")} className="w-full" />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">La constancia es la clave. Voy a invertir por (años):</label>
+            <Input ref={focusedInput === "years" ? inputRef : null} type="number" placeholder="10" value={years} onChange={handleInputChange(setYears, "years")} className="w-full" />
+          </div>
         </div>
         <div className="h-[300px] md:h-[400px] w-full mb-6 md:mb-8">
           <ResponsiveContainer width="100%" height="100%">
