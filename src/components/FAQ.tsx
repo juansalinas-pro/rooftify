@@ -43,7 +43,7 @@ export function FAQ() {
             },
             {
               question: "¿Cómo gano con mis tokens?",
-              answer: "Ganas a través de los ingresos por arriendo y la plusvalía de la propiedad.",
+              answer: "Ganas a través de los ingresos por alquiler y la plusvalía de la propiedad.",
             },
           ].map((item, index) => (
             <AccordionItem

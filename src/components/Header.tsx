@@ -33,7 +33,7 @@ export function Header() {
     { name: "Ventajas", sectionId: "advantages" },
     { name: "¿Por qué Paraguay?", sectionId: "paraguay" },
     { name: "Preguntas frecuentes", sectionId: "faq" },
-    { name: "Empieza hoy mismo", sectionId: "start-today" },
+    { name: "¡No te quedes afuera!", sectionId: "start-today" },
   ]
 
   const scrollToSection = useCallback((sectionId: string) => {
