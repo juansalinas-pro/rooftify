@@ -16,7 +16,7 @@ export function StartToday() {
           className="bg-orange-500 hover:bg-orange-600 text-white transition-colors text-lg px-8 py-4 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1"
           onClick={openContactForm}
         >
-          Asegurar mi acceso anticipado
+          Quiero saber más
         </Button>
       </div>
     </section>

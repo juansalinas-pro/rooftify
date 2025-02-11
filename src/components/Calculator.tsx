@@ -90,7 +90,7 @@ export function Calculator() {
             onClick={openContactForm}
             className="bg-orange-500 hover:bg-orange-600 text-white transition-colors text-lg px-6 md:px-8 py-4 md:py-6 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1"
           >
-            Asegurar mi acceso anticipado
+            Quiero saber más
           </Button>
         </div>
       </CardContent>

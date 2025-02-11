@@ -29,7 +29,7 @@ export function Hero() {
             className="bg-orange-500 hover:bg-orange-600 text-white transition-colors text-lg px-8 py-6 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1"
             onClick={openContactForm}
           >
-            Asegurar mi acceso anticipado
+            Quiero saber más
           </Button>
           <p className="text-sm mt-4 text-gray-500 max-w-lg">
             Regístrate hoy y sé el primero en conocer nuestro lanzamiento.
