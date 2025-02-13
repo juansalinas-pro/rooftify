@@ -38,7 +38,7 @@ export function Hero() {
         <div className="md:w-1/2 relative flex justify-center items-center">
           <div className="relative z-10">
             <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-02-01%20at%2017.43.42-Photoroom-u2lf46NE3Hc3ay0VXhQddeQQ54dR4e.png"
+              src="/rooftify-app.png"
               alt="App Interface Dashboard mostrando inversiones y balance"
               width={400}
               height={800}
