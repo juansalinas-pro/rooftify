@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ContactFormProvider } from "@/contexts/ContactFormContext";
 import "./globals.css";
@@ -6,6 +7,14 @@ import Script from "next/script";
 import AnalyticsTracker from "@/components/AnalyticsTracker"; // Rastrear cambios de ruta
 
 const inter = Inter({ subsets: ["latin"] });
+
+export const metadata: Metadata = {
+  title: "Rooftify",
+  description: "Rooftify - Inversiones Inmobiliarias",
+  icons: {
+    icon: "/favicon.ico", // Path to your favicon in the public directory
+  },
+};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
