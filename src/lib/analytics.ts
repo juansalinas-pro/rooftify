@@ -13,7 +13,7 @@ export const pageview = (url: string) => {
     action: string;
     category: string;
     label: string;
-    value: number;
+    value: any;
   }) => {
     window.gtag("event", action, {
       event_category: category,

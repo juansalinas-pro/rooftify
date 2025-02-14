@@ -1,6 +1,7 @@
 "use client"
 
 import { createContext, useContext, useState, type ReactNode } from "react"
+import { event } from "@/lib/analytics"
 
 interface ContactFormContextType {
   isContactFormOpen: boolean
@@ -13,7 +14,16 @@ const ContactFormContext = createContext<ContactFormContextType | undefined>(und
 export function ContactFormProvider({ children }: { children: ReactNode }) {
   const [isContactFormOpen, setIsContactFormOpen] = useState(false)
 
-  const openContactForm = () => setIsContactFormOpen(true)
+  const openContactForm = () => {
+    event({
+      action: "open_contact_form",
+      category: "Contact",
+      label: "Open Contact Form",
+      value: 1,
+    })
+    setIsContactFormOpen(true)
+  }
+
   const closeContactForm = () => setIsContactFormOpen(false)
 
   return (

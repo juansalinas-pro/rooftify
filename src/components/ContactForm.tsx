@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label"
 import { Send } from "lucide-react"
 import axios from 'axios';
 import { StatusCodes } from 'http-status-codes';
+import { event } from "@/lib/analytics"
 
 interface ContactFormProps {
   isOpen: boolean
@@ -28,11 +29,15 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
     setIsLoading(true)
     setMessage(null)
 
+    event({
+      action: "submit_contact_form",
+      category: "Contact",
+      label: "Submit Contact Form",
+      value: formData,
+    })
+
     try {
       const response = await axios.post('/api/contacts', formData);
-
-      console.log(response)
-
       if (response.data.status === StatusCodes.CREATED) {
         setMessage({ type: "success", text: "¡Gracias por registrarte!. Pronto recibirás novedades exclusivas. " })
         setTimeout(() => {
