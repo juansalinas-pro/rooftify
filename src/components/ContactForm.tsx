@@ -19,7 +19,6 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
   const [isLoading, setIsLoading] = useState(false)
   const [formData, setFormData] = useState({
     name: "",
-    phone: "",
     email: "",
   })
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
@@ -76,21 +75,6 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                 placeholder="Ingresá tu nombre y apellido"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                required
-                className="rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition duration-150 ease-in-out"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="phone" className="text-sm font-medium text-gray-700">
-                Teléfono
-              </Label>
-              <Input
-                id="phone"
-                type="tel"
-                placeholder="Ingresá tu teléfono"
-                value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                 required
                 className="rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition duration-150 ease-in-out"
               />

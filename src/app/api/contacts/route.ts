@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
       const contactRequest = await req.json();
       await base('wait-list').create({
         name: contactRequest.name,
-        phone: contactRequest.phone,
+        phone: '-',
         email: contactRequest.email
       });
       return NextResponse.json({ status: StatusCodes.CREATED });
