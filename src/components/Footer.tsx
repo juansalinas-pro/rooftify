@@ -9,7 +9,7 @@ export function Footer() {
           <div>
             <h3 className="text-xl font-bold mb-4">Qué hacemos</h3>
             <p className="text-gray-400">
-              Democratizamos la inversión inmobiliaria, permitiendo invertir en tokens de propiedades desde USD 100
+              Democratizamos la inversión inmobiliaria, permitiendo invertir en fracciones de propiedades desde USD 100
               desde cualquier parte del mundo.
             </p>
           </div>
@@ -18,7 +18,7 @@ export function Footer() {
             <ul className="space-y-2">
               <li>
                 <Link href="#" className="text-gray-300 hover:text-blue-400 transition-colors">
-                  Tokeniza tu propiedad
+                  Fragmenta tu propiedad
                 </Link>
               </li>
             </ul>
