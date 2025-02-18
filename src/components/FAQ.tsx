@@ -17,9 +17,9 @@ export function FAQ() {
         <Accordion type="single" collapsible className="space-y-4">
           {[
             {
-              question: "¿Qué es la Tokenización Inmobiliaria?",
+              question: "¿Qué es la Fragmentación Inmobiliaria?",
               answer:
-                "La tokenización inmobiliaria transforma propiedades en activos digitales (tokens), democratizando la inversión en bienes raíces. Esto permite acceder a inversiones inmobiliarias desde montos pequeños, ser copropietario digital y obtener beneficios sin comprar un inmueble completo, además de recibir ingresos pasivos por alquileres y plusvalía.",
+                "La fragmentación inmobiliaria transforma propiedades en activos digitales (fracciones inmobiliarias), democratizando la inversión en bienes raíces. Esto permite acceder a inversiones inmobiliarias desde montos pequeños, ser copropietario digital y obtener beneficios sin comprar un inmueble completo, además de recibir ingresos pasivos por alquileres y plusvalía.",
             },
             {
               question: "¿Quién administra la propiedad?",
@@ -31,18 +31,18 @@ export function FAQ() {
             },
             {
               question: "¿Cómo recibo mis pagos?",
-              answer: "Los pagos se realizan directamente a tu cuenta bancaria de forma automática.",
+              answer: "Los pagos se realizan a tu cuenta bancaria.",
             },
             {
-              question: "¿Qué es un token?",
-              answer: "Un token representa una fracción digital de una propiedad y sus beneficios económicos.",
+              question: "¿Qué es una fracción inmobiliaria?",
+              answer: "Una fracción inmobiliaria representa una fracción digital de una propiedad y sus beneficios económicos.",
             },
             {
-              question: "¿Puedo vender mis tokens antes?",
-              answer: "Sí, puedes vender tus tokens en cualquier momento a través de nuestra plataforma.",
+              question: "¿Puedo vender mis fracciones inmobiliarias antes?",
+              answer: "Sí, puedes vender tus fracciones inmobiliarias en cualquier momento a través de nuestra plataforma.",
             },
             {
-              question: "¿Cómo gano con mis tokens?",
+              question: "¿Cómo gano con mis fracciones inmobiliarias?",
               answer: "Ganas a través de los ingresos por alquiler y la plusvalía de la propiedad.",
             },
           ].map((item, index) => (

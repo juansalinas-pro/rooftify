@@ -9,8 +9,8 @@ export function WhatWeDo() {
     },
     {
       icon: Coins,
-      title: "Tokenizamos la inversión",
-      description: "Cada propiedad se divide en tokens para que puedas invertir sin barreras de entrada.",
+      title: "Fraccionamos la inversión",
+      description: "Cada propiedad se divide en fracciones para que puedas invertir sin barreras de entrada.",
     },
     {
       icon: Home,

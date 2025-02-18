@@ -75,13 +75,12 @@ export function Header() {
           className="text-2xl font-bold text-blue-800 hover:text-blue-600 transition-colors flex items-center"
         >
           <Image
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Untitled%20design%20(4)%20(2)-8CXmIjfynSf8zTCjPdrkzHtjEdNGLf.png"
+            src="/logo-rooftify.png"
             alt="Rooftify Logo"
-            width={36}
-            height={24}
+            width={200}
+            height={50}
             className="object-contain"
           />
-          Rooftify
         </Link>
         <nav className="hidden md:flex space-x-6">
           {navItems.map((item) => (

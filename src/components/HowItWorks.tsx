@@ -12,7 +12,7 @@ export function HowItWorks() {
       step: 2,
       icon: Coins,
       title: "Invierte con total flexibilidad",
-      description: "Compra tokens respaldados por bienes raíces desde solo USD 100.",
+      description: "Compra fracciones digitales respaldados por bienes raíces desde solo USD 100.",
     },
     {
       step: 3,

@@ -10,7 +10,7 @@ export function InvestmentAdvantages() {
     {
       icon: Eye,
       title: "Seguridad y transparencia",
-      description: "Cada token representa una propiedad real.",
+      description: "Cada fracción representa una propiedad real.",
     },
     {
       icon: Scale,
