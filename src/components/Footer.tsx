@@ -64,10 +64,10 @@ export function Footer() {
             © 2025 Rooftify. Todos los derechos reservados. Asunción, Paraguay.
           </p>
           <div className="flex space-x-4">
-            <Link href="#" className="text-gray-300 hover:text-blue-400 transition-colors">
+            <Link href="https://www.instagram.com/rooftify.py/" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-blue-400 transition-colors">
               <Instagram size={20} />
             </Link>
-            <Link href="#" className="text-gray-300 hover:text-blue-400 transition-colors">
+            <Link href="https://www.linkedin.com/company/rooftify/" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-blue-400 transition-colors">
               <Linkedin size={20} />
             </Link>
           </div>
@@ -76,4 +76,3 @@ export function Footer() {
     </footer>
   )
 }
-
